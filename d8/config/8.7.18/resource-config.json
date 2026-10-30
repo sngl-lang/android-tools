@@ -1,0 +1,13 @@
+{
+  "resources":{
+  "includes":[{
+    "pattern":"\\QMETA-INF/services/com.android.tools.r8.internal.OU\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
+  }, {
+    "pattern":"\\Qr8-version.properties\\E"
+  }, {
+    "pattern":"\\Qresources/new_api_database.ser\\E"
+  }]},
+  "bundles":[]
+}

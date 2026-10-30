@@ -13,16 +13,16 @@ set -euo pipefail
 lib=$1
 version=$2
 shift 2
-here=$(cd "$(dirname "$0")" && pwd)
-: "${GRAALVM_HOME:?set GRAALVM_HOME to a GraalVM CE 21 install}"
+. "$(dirname "$0")/../lib/host.sh"
+here=$(abspath "$(dirname "$0")")
 
 cp=$lib/kotlin-compiler.jar
 for j in annotations-13.0 kotlin-stdlib kotlin-reflect kotlin-script-runtime trove4j \
 	kotlinx-coroutines-core-jvm compose-compiler-plugin kotlin-serialization-compiler-plugin; do
-	cp=$cp:$lib/$j.jar
+	cp=$(classpath "$cp" "$lib/$j.jar")
 done
 
 mkdir -p "$here/config/$version"
-exec "$GRAALVM_HOME/bin/java" -Xss8m \
+exec "$java" -Xss8m \
 	-agentlib:native-image-agent=config-merge-dir="$here/config/$version" \
 	-cp "$cp" org.jetbrains.kotlin.cli.jvm.K2JVMCompiler "$@"

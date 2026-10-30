@@ -1,0 +1,4 @@
+# What a release builds: one "<tool> <version>" per line. Each version needs
+# its traced config under <tool>/config/<version>.
+kotlinc 2.1.0
+d8 8.7.18
