@@ -18,6 +18,10 @@ aarch64 | arm64) host_arch=arm64 ;;
 esac
 
 if [ "$host_os" = windows ]; then
+	# Every path these scripts pass is already a Windows one (abspath), and
+	# Git Bash's own rewriting of whatever looks like a POSIX path list split
+	# a classpath at D:'s colon.
+	export MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*'
 	cp_sep=';'
 	exe=.exe
 	native_image=$GRAALVM_HOME/bin/native-image.cmd
